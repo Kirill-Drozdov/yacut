@@ -14,18 +14,40 @@
           <div class="col-sm">
           </div>
           <div class="col-sm">
-            <form>
+            <form method="POST" novalidate>
+              {{ form.csrf_token }}
+              <p class="py-3 mb-3">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                    <span style="color: red">{{ message }}</span>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+              </p>
               <div>
                 <div>
-                  <input type="text" class="form-control form-control-lg py-2 mb-3" id="form-title" name=""
-                    placeholder="Длинная ссылка">
-                  <p><span style="color:red">Текст возможной ошибки</span></p>
+                  {{ form.original(type="url", class="form-control form-control-lg py-3 mb-3", placeholder=form.original.label.text) }}
+                  <p>
+                    {% if form.original.errors %}
+                      {% for error in form.original.errors %}
+                        <span style="color: red">{{ error }}</span>
+                      {% endfor %}
+                    {% endif %}
+                  </p>
                 </div>
                 <div>
-                  <input type="url" class="form-control form-control-lg py-2 mb-3" id="form-link" name=""
-                    placeholder="Ваш вариант короткой ссылки">
-                  <p><span style="color:red">Текст возможной ошибки</span></p>
+                  {{ form.short(type="text", class="form-control form-control-lg py-3 mb-3", placeholder=form.short.label.text) }}
+                  <p>
+                    {% if form.short.errors %}
+                      {% for error in form.short.errors %}
+                        <span style="color: red">{{ error }}</span>
+                      {% endfor %}
+                    {% endif %}
+                  </p>
                 </div>
+
+            
 
                 <input type="submit" class="btn btn-primary" value="Создать">
               </div>
