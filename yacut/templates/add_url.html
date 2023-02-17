@@ -3,9 +3,9 @@
 {% block title %}YaCut - укоротитель ссылок{%endblock %} 
 {% block content %}
   <main>
-    <section class="container my-5 px-4">
+    <section class="container my-1 px-4">
       <h1 class="text-center"><span style="color:red">Ya</span>Cut</h1>
-      <p class="text-center my-4">
+      <p class="text-center my-2">
         Создайте короткую ссылку автоматически или предложите свой вариант
       </p>
 
@@ -46,9 +46,6 @@
                     {% endif %}
                   </p>
                 </div>
-
-            
-
                 <input type="submit" class="btn btn-primary" value="Создать">
               </div>
             </form>
@@ -57,21 +54,26 @@
           </div>
         </div>
       </div>
-
-      <div class="container">
-        <div class="row ">
-          <div class="col-sm">
-          </div>
-          <div class="col-sm">
-            <p class="text-center">
-            <h5 class="text-center">Пример информационного сообщения</h5>
-            </p>
-          </div>
-          <div class="col-sm">
+      {% if form.validate_on_submit() %}
+        <div class="container">
+          <div class="row ">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+              <p class="text-center">
+                <h6 class="text-center">Ваша новая ссылка:</h6>
+              </p>
+              <p class="text-center">
+                <a class="nav-link" href="{{ url_for('redirect_view', short=form.short.data) }}">
+                  http://127.0.0.1:5000/{{ form.short.data }}
+                </a>
+              </p>
+            </div>
+            <div class="col-sm">
+            </div>
           </div>
         </div>
-      </div>
-
+      {% endif %}
     </section>
   </main>
 {% endblock %}
