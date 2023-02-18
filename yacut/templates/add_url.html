@@ -14,7 +14,7 @@
           <div class="col-sm">
           </div>
           <div class="col-sm">
-            <form method="POST" novalidate>
+            <form method="POST">
               {{ form.csrf_token }}
               <p class="py-3 mb-3">
                 {% with messages = get_flashed_messages() %}
@@ -27,20 +27,20 @@
               </p>
               <div>
                 <div>
-                  {{ form.original(type="url", class="form-control form-control-lg py-3 mb-3", placeholder=form.original.label.text) }}
+                  {{ form.original_link(type="url", class="form-control form-control-lg py-3 mb-3", placeholder=form.original_link.label.text) }}
                   <p>
-                    {% if form.original.errors %}
-                      {% for error in form.original.errors %}
+                    {% if form.original_link.errors %}
+                      {% for error in form.original_link.errors %}
                         <span style="color: red">{{ error }}</span>
                       {% endfor %}
                     {% endif %}
                   </p>
                 </div>
                 <div>
-                  {{ form.short(type="text", class="form-control form-control-lg py-3 mb-3", placeholder=form.short.label.text) }}
+                  {{ form.custom_id(type="text", class="form-control form-control-lg py-3 mb-3", placeholder=form.custom_id.label.text) }}
                   <p>
-                    {% if form.short.errors %}
-                      {% for error in form.short.errors %}
+                    {% if form.custom_id.errors %}
+                      {% for error in form.custom_id.errors %}
                         <span style="color: red">{{ error }}</span>
                       {% endfor %}
                     {% endif %}
@@ -64,8 +64,8 @@
                 <h6 class="text-center">Ваша новая ссылка:</h6>
               </p>
               <p class="text-center">
-                <a class="nav-link" href="{{ url_for('redirect_view', short=form.short.data) }}">
-                  http://127.0.0.1:5000/{{ form.short.data }}
+                <a class="nav-link" href="{{ url_for('redirect_view', custom_id=form.custom_id.data) }}">
+                  http://127.0.0.1:5000/{{ form.custom_id.data }}
                 </a>
               </p>
             </div>
