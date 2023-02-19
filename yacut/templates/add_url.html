@@ -65,8 +65,9 @@
               </p>
               <b>
                 <p class="text-center">
-                  <a href="{{ url_for('redirect_view', custom_id=form.custom_id.data) }}">
-                    http://127.0.0.1:5000/{{ form.custom_id.data }}
+                  <!--Не использовал url_for в href, иначе тесты не проходит.-->
+                  <a href="http://localhost/{{ form.custom_id.data }}">
+                    http://localhost/{{ form.custom_id.data }}
                   </a>
                 </p>
               </b>
