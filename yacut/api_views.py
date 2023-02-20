@@ -4,6 +4,7 @@ from yacut import app, db
 from yacut.views import get_unique_short_id
 from yacut.models import URLMap
 from yacut.error_handlers import InvalidAPIUsage
+from yacut.validators import validate_short_url
 
 
 @app.route('/api/id/', methods=['POST'])
@@ -19,7 +20,7 @@ def create_id_view():
         raise InvalidAPIUsage('"url" является обязательным полем!')
     if URLMap.query.filter_by(short=custom_id).first() is not None:
         raise InvalidAPIUsage(f'Имя "{custom_id}" уже занято.')
-    if len(custom_id) > 16:
+    if not validate_short_url(custom_id):
         raise InvalidAPIUsage('Указано недопустимое имя для короткой ссылки')
 
     url = URLMap()

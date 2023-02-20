@@ -1,6 +1,6 @@
 from flask import render_template, jsonify
 
-from . import app, db
+from yacut import app, db
 
 
 @app.errorhandler(404)

@@ -2,12 +2,10 @@ import string
 from random import randrange
 
 from flask import abort, render_template, redirect, flash
-
 from yacut import app, db
+from yacut.constants import ADD_URL_HTML
 from yacut.forms import URLForm
 from yacut.models import URLMap
-
-ADD_URL_HTML = 'add_url.html'
 
 
 def get_unique_short_id():
@@ -31,7 +29,7 @@ def add_url_view():
             form.custom_id.data = short
 
         if URLMap.query.filter_by(short=short).first():
-            flash('Такая короткая ссылка уже существует!')
+            flash(f'Имя {short} уже занято!')
             return render_template(ADD_URL_HTML, form=form)
         url = URLMap(
             original=form.original_link.data,

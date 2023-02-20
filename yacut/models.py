@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from yacut import db
+from yacut.constants import HOST_URL
 
 
 class URLMap(db.Model):
@@ -12,7 +13,7 @@ class URLMap(db.Model):
     def to_dict(self):
         return dict(
             url=self.original,
-            short_link='http://localhost/' + self.short,
+            short_link=HOST_URL + self.short,
         )
 
     def from_dict(self, data):
